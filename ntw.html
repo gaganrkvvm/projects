@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Speed Detection</title>
+<script>
+  function detectNetworkSpeed() {
+    const imageSrc = "https://www.example.com/image.jpg"; // Replace with the actual image URL
+    const startTime = performance.now();
+
+    const image = new Image();
+    image.onload = function() {
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      const speedMbps = (image.fileSize * 8) / (duration / 1000) / 1000000;
+      const speedKbps = speedMbps * 1000;
+      alert(`Network Speed: ${speedKbps.toFixed(2)} Kbps`);
+    };
+
+    image.src = imageSrc + '?random=' + Math.random();
+  }
+</script>
+</head>
+<body>
+<button onclick="detectNetworkSpeed()">Detect Network Speed</button>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network Speed Detector</title>
+</head>
+<body>
+  <h1>Network Speed Detector</h1>
+  <button onclick="detectNetworkSpeed()">Detect Network Speed</button>
+  <p id="result"></p>
+
+  <script>
+    function detectNetworkSpeed() {
+      const startTime = performance.now();
+      const fileSize = 1000000; // 1MB file size for example
+      const fileUrl = 'https://as2.ftcdn.net/v2/jpg/05/75/88/25/1000_F_575882570_foA2FQpRz9n2nDR1Fv9TumUn0HcHq5tG.jpg';
+
+      fetch(fileUrl)
+        .then(response => {
+          const endTime = performance.now();
+          const duration = (endTime - startTime) / 1000; // Convert to seconds
+          const speed = (fileSize / duration) * 8; // Calculate speed in Mbps
+          document.getElementById('result').innerText = `Your network speed is approximately ${speed.toFixed(2)} Mbps.`;
+        })
+        .catch(error => {
+          document.getElementById('result').innerText = 'Error: Failed to detect network speed.';
+          console.error('Error:', error);
+        });
+    }
+  </script>
+</body>
+</html>
