@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mousemove Parallax Effect</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    perspective: 1000px;
+  }
+  
+  .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .bg {
+    background-image: url('https://source.unsplash.com/random');
+    background-size: cover;
+    background-position: center;
+    transform: translateZ(-1px) scale(2);
+  }
+  
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="container">
+  <div class="layer bg"></div>
+  <div class="layer content" id="content">
+    <h1>Mousemove Parallax Effect</h1>
+    <p>Move your mouse to see the parallax effect!</p>
+  </div>
+</div>
+
+<script>
+  var container = document.getElementById('container');
+  var content = document.getElementById('content');
+
+  container.addEventListener('mousemove', function(event) {
+    var mouseX = event.clientX;
+    var mouseY = event.clientY;
+
+    var centerX = container.offsetWidth / 2;
+    var centerY = container.offsetHeight / 2;
+
+    var offsetX = mouseX - centerX;
+    var offsetY = mouseY - centerY;
+
+    var percentX = offsetX / centerX;
+    var percentY = offsetY / centerY;
+
+    var translateX = percentX * 20;
+    var translateY = percentY * 20;
+
+    content.style.transform = 'translate(-50%, -50%) translate(' + translateX + 'px, ' + translateY + 'px)';
+  });
+</script>
+
+</body>
+</html>
